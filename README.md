@@ -1,6 +1,6 @@
-# Waywall Ninjabrain Overlay
+# Waywall Paceman Overlay
 
-A lightweight [Ninjabrain Bot](https://github.com/Ninjabrain1/Ninjabrain-Bot) overlay for [Waywall](https://github.com/tesselslate/waywall)
+A paceman stat overlay for [Waywall](https://github.com/tesselslate/waywall)
 
 ---
 
@@ -8,10 +8,8 @@ A lightweight [Ninjabrain Bot](https://github.com/Ninjabrain1/Ninjabrain-Bot) ov
 - Clone the repository into your waywall config folder
 ```bash
 cd ~/.config/waywall
-git clone https://github.com/arjuncgore/waywall_ninbot_overlay.git
+git clone https://github.com/arjuncgore/waywall_paceman_overlay.git
 ```
-- Enable API in Ninjabrain Bot
-  - Navigate to Settings > Advanced and turn on "Enable API"
 - Install `luarocks` using your package manager (this is also a waywall dependency and should already by installed on your system)
   - `sudo dnf install luarocks` on Fedora
   - `sudo apt-get install luarocks` on Debian/Ubuntu
