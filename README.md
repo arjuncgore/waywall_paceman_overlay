@@ -1,6 +1,6 @@
 # Waywall Paceman Overlay
 
-A paceman stat overlay for [Waywall](https://github.com/tesselslate/waywall)
+A paceman statistics overlay for [Waywall](https://github.com/tesselslate/waywall)
 
 ---
 
@@ -10,80 +10,65 @@ A paceman stat overlay for [Waywall](https://github.com/tesselslate/waywall)
 cd ~/.config/waywall
 git clone https://github.com/arjuncgore/waywall_paceman_overlay.git
 ```
-- Install `luarocks` using your package manager (this is also a waywall dependency and should already by installed on your system)
-  - `sudo dnf install luarocks` on Fedora
-  - `sudo apt-get install luarocks` on Debian/Ubuntu
-  - `sudo pacman -S luarocks` on Arch
-- Install `luasec` with luarocks
-  - `sudo luarocks --lua-version=5.1 install luasec`
----
 
 ## Setup
 ### 1. Import the module
 
-Add this line to your `init.lua` **before your `config.actions` section**:
+Add this line to your `init.lua` file
 
 ```lua
-local nb_overlay = require("waywall_ninbot_overlay.nb_overlay")
+local pm_overlay = require("waywall_paceman_overlay.pm_overlay")
 ```
 
-### 2. Add keybindings
+### 2. Change your username
 
-Add these binds to `config.actions`:
-
-```lua
-["*-C"] = function()
-  if waywall.get_key("F3") then
-    waywall.press_key("C")
-    waywall.sleep(200)
-    nb_overlay.enable_overlay()
-  else
-    return false
-  end
-end,
-
-["<any key>"] = nb_overlay.disable_overlay,
-```
-> Replace `<any key>` with your preferred key for disabling the overlay.
-**Do not change the key for `enable_overlay`** — it is designed to be triggered with `F3 + C` to ensure the overlay updates in sync with Minecraft.
----
+Replace the placeholder "goreay" at the top of `pm_overlay.lua` with your own
 
 ## Customization
-
-### Overlay text appearance
-Edit the `look` table in `nb_overlay.lua` to change the text's position, color, size, and boldness:
-
+Edit these lines to your desired statistics and look.
 ```lua
+-- ==== CONFIG ====
+local username = "goreay"
+local hours = 12
+local hoursBetween = 1
+local header = "PACEMAN STATS\n"
+
 local look = {
-    X = 500,
-    Y = 10,
+    X = 300,
+    Y = 1000,
     color = '#000000',
-    size = 2,
     bold = true,
+    size = 3
+}
+
+local info = {
+    { tag = "Nethers",           enabled = true,  key = "nether" },
+    { tag = "Bastions",          enabled = true,  key = "bastion" },
+    { tag = "Fortresses",        enabled = true,  key = "fortress" },
+    { tag = "First Structures",  enabled = false, key = "first_structure" },
+    { tag = "Second Structures", enabled = false, key = "second_structure" },
+    { tag = "First Portals",     enabled = false, key = "first_portal" },
+    { tag = "Strongholds",       enabled = false, key = "stronghold" },
+    { tag = "End Enters",        enabled = false, key = "end" },
+    { tag = "Completions",       enabled = false, key = "finish" },
 }
 ```
-
-### Background image
-Replace `nb_background.png` with your own image.  
-
-- It will be **automatically resized** to fit the overlay
-- It's suggested to use a **solid color or minimal texture** — other pictures may look distorted when stretched
+IMPORTANT: Do not change or remove the key values in the info table. You may enable each split and/or change its tag to whatever you like.
 
 ---
 ## Preview
 <p align="center">
   <img src="./preview.png" width="1000">
 </p>
-*Example overlay showing Nether travel prediction*
+*Example of my personal wall with session statistics from paceman*
 
 ---
 
 ## Credits
 
 - **Tesselslate** – creator of the original Waywall
-- **Arsoniv** – developer of the Waywall fork with HTTP support (inspired the original version of this overlay)
-- **Ninjabrain** – creator of Ninjabrain bot
+- **Arsoniv** – inspired the origin of this overlay
+- **Paceman Devs** - created the paceman tracker and api endpoints necessary https://github.com/PaceMan-MCSR
 - **David Heiko Kolf and others** - creator of the json lua library https://github.com/LuaDist/dkjson
-- **Jakob Green** - creator of the requests lua library https://github.com/JakobGreen/lua-requests
 
 ---
